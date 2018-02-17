@@ -1,7 +1,8 @@
 =============================
-appconf
+appconf |latest-version|
 =============================
 
+|travis-master| |coverage-master| |quality| |license|
 
 Simple method used to load configuration variables from different sources.
 
@@ -59,3 +60,18 @@ Bug report and Help
 
 For bug reports open a github ticket. Patches gratefully accepted.
 
+
+.. |travis-master| image:: https://travis-ci.org/adonisnafeh/appconf.svg?branch=master
+   :alt: Build Status - master branch
+   :target: https://travis-ci.org/adonisnafeh/appconf
+.. |coverage-master| image:: https://coveralls.io/repos/github/adonisnafeh/appconf/badge.svg?branch=master
+   :alt: Coverage of the code
+   :target: https://coveralls.io/github/adonisnafeh/appconf?branch=master
+.. |latest-version| image:: https://badge.fury.io/py/appconf.svg
+   :alt: Latest version on Pypi
+   :target: https://badge.fury.io/py/appconf
+.. |quality| image:: https://img.shields.io/codacy/grade/afacb4b4c83f410fb7cb45458375d1bd.svg?style=flat-square
+   :target: https://www.codacy.com/app/adonisnafeh/appconf
+.. |license| image:: https://img.shields.io/github/license/adonisnafeh/appconf.svg?style=flat-square
+   :alt: License
+   :target: https://github.com/adonisnafeh/appconf/blob/master/LICENSE
