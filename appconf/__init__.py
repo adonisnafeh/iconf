@@ -14,7 +14,7 @@ def get(keys=None, path=None):
         try:
             with open(path, 'r') as f:
                 json_data = json.load(f)
-        except FileNotFoundError:
+        except IOError:
             pass
 
     if json_data and not keys:
