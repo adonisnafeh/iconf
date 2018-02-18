@@ -13,7 +13,7 @@ The method will search for the keys in any of the 3 sources and returns the firs
 Search order:
 
 1. Environment
-2. JSON - used if path is set
+2. JSON - used if path is set and the file exists
 3. Django settings - used if Django is installed
 
 This is useful if you need to set configuration variables(SECRET_KEY, DATABASE_NAME, etc...) via environment on a CI server and load the same variables from a json file in a production environment.

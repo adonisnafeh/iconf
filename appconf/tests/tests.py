@@ -61,6 +61,19 @@ class AppConfTest(unittest.TestCase):
                          os.environ['ENVIRONMENT_VAR1'])
         self.assertEqual(configs['MISSING_VARIABLE'], None)
 
+    def test_environment_missing_json_conf(self):
+        """get settings from environment variables and/or json file"""
+        os.environ['ENVIRONMENT_VAR1'] = ENVIRONMENT_VAR1
+
+        configs = appconf.get(['JSON_VAR1',
+                               'ENVIRONMENT_VAR1',
+                               'MISSING_VARIABLE'], 'missing_file.json')
+
+        self.assertEqual(configs['JSON_VAR1'], None)
+        self.assertEqual(configs['ENVIRONMENT_VAR1'],
+                         os.environ['ENVIRONMENT_VAR1'])
+        self.assertEqual(configs['MISSING_VARIABLE'], None)
+
     def test_bad_parameters(self):
         with self.assertRaises(Exception):
             appconf.get()

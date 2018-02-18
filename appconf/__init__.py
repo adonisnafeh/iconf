@@ -9,11 +9,13 @@ def get(keys=None, path=None):
     if keys and not isinstance(keys, list):
         raise Exception("keys argument must be a list")
 
+    json_data = {}
     if path:
-        with open(path, 'r') as f:
-            json_data = json.load(f)
-    else:
-        json_data = {}
+        try:
+            with open(path, 'r') as f:
+                json_data = json.load(f)
+        except FileNotFoundError:
+            pass
 
     if json_data and not keys:
         return json_data
