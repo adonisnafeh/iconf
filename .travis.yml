@@ -8,7 +8,7 @@ python:
 install:
   - pip install coveralls codecov
 script:
-  - coverage run --source=appconf -m unittest discover
+  - coverage run --source=iconf -m unittest discover
 after_success:
   - coveralls
   - codecov

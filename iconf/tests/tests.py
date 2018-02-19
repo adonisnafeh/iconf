@@ -1,7 +1,7 @@
 import unittest
 import os
 import pip
-import appconf
+import iconf
 
 ENVIRONMENT_VAR1 = 'ENVIRONMENT_VAR1'
 ENVIRONMENT_VAR2 = 'ENVIRONMENT_VAR2'
@@ -9,17 +9,17 @@ JSON_VAR1 = 'JSON_VAR1'
 JSON_VAR2 = 'JSON_VAR2'
 DJANGO_SETTINGS_VAR1 = 'DJANGO_SETTINGS_VAR1'
 DJANGO_SETTINGS_VAR2 = 'DJANGO_SETTINGS_VAR2'
-CONFIGS_PATH = 'appconf/tests/configs.json'
-DJANGO_SETTINGS_PATH = 'appconf.tests.settings'
+CONFIGS_PATH = 'iconf/tests/configs.json'
+DJANGO_SETTINGS_PATH = 'iconf.tests.settings'
 
 
-class AppConfTest(unittest.TestCase):
+class IConfTest(unittest.TestCase):
     def test_environment_conf(self):
         """get variables from environment variables"""
         os.environ['ENVIRONMENT_VAR1'] = ENVIRONMENT_VAR1
         os.environ['ENVIRONMENT_VAR2'] = ENVIRONMENT_VAR2
 
-        configs = appconf.get(['ENVIRONMENT_VAR1',
+        configs = iconf.get(['ENVIRONMENT_VAR1',
                                'ENVIRONMENT_VAR2',
                                'MISSING_VARIABLE'])
 
@@ -31,7 +31,7 @@ class AppConfTest(unittest.TestCase):
 
     def test_json_partial_conf(self):
         """get keys from json file"""
-        configs = appconf.get(['JSON_VAR1',
+        configs = iconf.get(['JSON_VAR1',
                                'JSON_VAR2',
                                'MISSING_VARIABLE'], CONFIGS_PATH)
 
@@ -41,7 +41,7 @@ class AppConfTest(unittest.TestCase):
 
     def test_json_full_conf(self):
         """get all keys from json file"""
-        configs = appconf.get(path=CONFIGS_PATH)
+        configs = iconf.get(path=CONFIGS_PATH)
 
         self.assertEqual(configs['JSON_VAR1'], JSON_VAR1)
         self.assertEqual(configs['JSON_VAR2'], JSON_VAR2)
@@ -50,7 +50,7 @@ class AppConfTest(unittest.TestCase):
         """get settings from environment variables and/or json file"""
         os.environ['ENVIRONMENT_VAR1'] = ENVIRONMENT_VAR1
 
-        configs = appconf.get(['JSON_VAR1',
+        configs = iconf.get(['JSON_VAR1',
                                'JSON_VAR2',
                                'ENVIRONMENT_VAR1',
                                'MISSING_VARIABLE'], CONFIGS_PATH)
@@ -65,7 +65,7 @@ class AppConfTest(unittest.TestCase):
         """get settings from environment variables and/or json file"""
         os.environ['ENVIRONMENT_VAR1'] = ENVIRONMENT_VAR1
 
-        configs = appconf.get(['JSON_VAR1',
+        configs = iconf.get(['JSON_VAR1',
                                'ENVIRONMENT_VAR1',
                                'MISSING_VARIABLE'], 'missing_file.json')
 
@@ -76,12 +76,12 @@ class AppConfTest(unittest.TestCase):
 
     def test_bad_parameters(self):
         with self.assertRaises(Exception):
-            appconf.get()
+            iconf.get()
         with self.assertRaises(Exception):
-            appconf.get('test')
+            iconf.get('test')
 
 
-class DjangoAppConfTest(unittest.TestCase):
+class JSONEnvironmentDjangoIConfTest(unittest.TestCase):
     def test_environment_django_conf(self):
         """
         get variables from environment variables and/or django settings
@@ -91,7 +91,7 @@ class DjangoAppConfTest(unittest.TestCase):
         os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_PATH
         os.environ['ENVIRONMENT_VAR1'] = ENVIRONMENT_VAR1
 
-        configs = appconf.get(['ENVIRONMENT_VAR1',
+        configs = iconf.get(['ENVIRONMENT_VAR1',
                                'DJANGO_SETTINGS_VAR1',
                                'DJANGO_SETTINGS_VAR2',
                                'MISSING_VARIABLE'])
@@ -112,7 +112,7 @@ class DjangoAppConfTest(unittest.TestCase):
         os.environ['ENVIRONMENT_VAR1'] = ENVIRONMENT_VAR1
         os.environ['ENVIRONMENT_VAR2'] = ENVIRONMENT_VAR2
 
-        configs = appconf.get(['ENVIRONMENT_VAR1',
+        configs = iconf.get(['ENVIRONMENT_VAR1',
                                'ENVIRONMENT_VAR2',
                                'DJANGO_SETTINGS_VAR1',
                                'DJANGO_SETTINGS_VAR2',
